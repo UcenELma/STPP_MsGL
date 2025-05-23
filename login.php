@@ -1,32 +1,53 @@
+<!-- login.php -->
 <?php
 session_start();
+require 'config.php'; // Pour accéder à $db
 
 $error = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Dummy credentials — replace with DB lookup in real projects
-    $username = $_POST['username'];
+    $email = $_POST['username'];
     $password = $_POST['password'];
 
-    if ($username === 'hocine@gl.com' && $password === '3310') {
-        $_SESSION['user_id'] = 1;
-        $_SESSION['username'] = $username;
-        header("Location: index.php");
-        exit();
-    } elseif ($username === 'aya@gl.com' && $password === '2210') {
-        $_SESSION['user_id'] = 2;
-        $_SESSION['username'] = $username;
-        header("Location: forniseur.php");
-        exit();
-    } elseif ($username === 'oum@gl.com' && $password === '1110') {
-        $_SESSION['user_id'] = 3;
-        $_SESSION['username'] = $username;
-        header("Location: transporteur.php");
-        exit();
+    // Requête préparée pour éviter l'injection SQL
+    $stmt = $db->prepare("SELECT * FROM utilisateurs WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        // Vérification du mot de passe
+        if (password_verify($password, $user['mot_de_passe_hash'])) {
+            // Connexion réussie
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['email'];
+            $_SESSION['role'] = $user['role'];
+
+            // Redirection selon le rôle
+            switch ($user['role']) {
+                case 'admin':
+                    header("Location: index.php");
+                    break;
+                case 'fournisseur':
+                    header("Location: forniseur.php");
+                    break;
+                case 'transporteur':
+                    header("Location: transporteur.php");
+                    break;
+                default:
+                    $error = "Rôle inconnu.";
+            }
+            exit();
+        } else {
+            $error = "Mot de passe incorrect.";
+        }
     } else {
-        $error = "Invalid username or password.";
+        $error = "Email non trouvé.";
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>

@@ -13,6 +13,10 @@
                 <input type="text" name="type" class="form-control" placeholder="Type" required>
             </div>
             <div class="mb-3">
+                <label for="qte" class="form-label">Quantité en stock</label>
+                <input type="number" name="qte" id="qte" class="form-control" min="0" required>
+            </div>
+            <div class="mb-3">
                 <label for="date_production" class="form-label">Date de production</label>
                 <input type="date" name="date_production" id="date_production" class="form-control" required>
             </div>
@@ -47,3 +51,4 @@
         </form>
     </div>
 </div>
+

@@ -2,52 +2,42 @@
 // modifier_produit.php
 require_once __DIR__ . '/../config.php';
 
-// Vérifier que l'id est fourni en GET
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die('ID produit invalide.');
 }
 
 $id = (int) $_GET['id'];
 
-// Initialisation des variables
 $errors = [];
 $success = false;
 
-// Récupérer la liste des fournisseurs pour le select
 $stmtF = $db->query("SELECT id, nom FROM utilisateurs WHERE role = 'fournisseur' ORDER BY nom");
 $fournisseurs = $stmtF->fetchAll(PDO::FETCH_ASSOC);
 
-// Si formulaire soumis en POST, traiter la modification
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer et sécuriser les données
     $nom = trim($_POST['nom'] ?? '');
     $type = trim($_POST['type'] ?? '');
     $date_production = $_POST['date_production'] ?? '';
     $date_peremption = $_POST['date_peremption'] ?? '';
     $fournisseur_id = isset($_POST['fournisseur_id']) ? (int) $_POST['fournisseur_id'] : null;
+    $qte = isset($_POST['qte']) ? (int) $_POST['qte'] : null;  // <-- Récupération de la quantité
 
     // Validation simple
-    if ($nom === '')
-        $errors[] = "Le nom est requis.";
-    if ($type === '')
-        $errors[] = "Le type est requis.";
-    if ($date_production === '')
-        $errors[] = "La date de production est requise.";
-    if ($date_peremption === '')
-        $errors[] = "La date de péremption est requise.";
-    if (!$fournisseur_id)
-        $errors[] = "Le fournisseur est requis.";
+    if ($nom === '') $errors[] = "Le nom est requis.";
+    if ($type === '') $errors[] = "Le type est requis.";
+    if ($date_production === '') $errors[] = "La date de production est requise.";
+    if ($date_peremption === '') $errors[] = "La date de péremption est requise.";
+    if (!$fournisseur_id) $errors[] = "Le fournisseur est requis.";
+    if ($qte === null || $qte < 0) $errors[] = "La quantité est requise et doit être positive.";
 
-    // Si pas d'erreur, faire la mise à jour
     if (empty($errors)) {
         $sql = "UPDATE produits 
-                SET nom = ?, type = ?, date_production = ?, date_peremption = ?, fournisseur_id = ?
+                SET nom = ?, type = ?, date_production = ?, date_peremption = ?, fournisseur_id = ?, qte = ?
                 WHERE id = ?";
         $stmt = $db->prepare($sql);
         try {
-            $stmt->execute([$nom, $type, $date_production, $date_peremption, $fournisseur_id, $id]);
+            $stmt->execute([$nom, $type, $date_production, $date_peremption, $fournisseur_id, $qte, $id]);
             $success = true;
-            // Optionnel : rediriger vers la liste après modif réussie
             header('Location: ../index.php?page=produits/liste_produits');
             exit;
         } catch (PDOException $e) {
@@ -55,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 } else {
-    // Sinon GET, récupérer les données actuelles pour préremplir le formulaire
     $stmt = $db->prepare("SELECT * FROM produits WHERE id = ?");
     $stmt->execute([$id]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -64,12 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Produit non trouvé.");
     }
 
-    // Préremplissage des champs
     $nom = $produit['nom'];
     $type = $produit['type'];
     $date_production = $produit['date_production'];
     $date_peremption = $produit['date_peremption'];
     $fournisseur_id = $produit['fournisseur_id'];
+    $qte = $produit['qte'];  // <-- Préremplissage de la quantité
 }
 ?>
 
@@ -109,6 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     value="<?= htmlspecialchars($date_peremption) ?>">
             </div>
             <div class="mb-3">
+                <input type="number" name="qte" class="form-control" placeholder="Quantité" min="0" required
+                    value="<?= htmlspecialchars($qte) ?>">
+            </div>
+            <div class="mb-3">
                 <select name="fournisseur_id" class="form-select" required>
                     <option value="">-- Choisir un fournisseur --</option>
                     <?php foreach ($fournisseurs as $fournisseur): ?>
@@ -117,15 +110,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <button type="submit" class="btn btn-success">
-                    <i class="fa-solid fas fa-save"></i> Enregistrer les modifications
-                </button>
-
             </div>
-            <a href="index.php?page=utilisateurs/formulaire_utilisateur"
-                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mt-2">
-                <i class="fa-solid fa-user-plus fas fa-sm text-white-50"></i> Ajouter un nouveau fournisseur
-            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fa-solid fas fa-save"></i> Enregistrer les modifications
+            </button>
         </form>
+
+        <a href="index.php?page=utilisateurs/formulaire_utilisateur"
+            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mt-2">
+            <i class="fa-solid fa-user-plus fas fa-sm text-white-50"></i> Ajouter un nouveau fournisseur
+        </a>
     </div>
 </div>
