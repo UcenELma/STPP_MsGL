@@ -1,6 +1,6 @@
 <!-- liste_produits.php -->
 <meta charset="utf-8" />
-<style>
+<!-- <style>
     /* Styles personnalisés */
     .badge-warning {
         background-color: #ffc107;
@@ -13,7 +13,7 @@
     .btn-sm {
         margin-right: 5px;
     }
-</style>
+</style> -->
 
 <?php
 require_once 'config.php';
@@ -200,22 +200,14 @@ $count_near_expiry = $alertStmtNearExpiry->fetchColumn();
                                         $diff = $dateNow->diff($datePeremption);
                                         $daysDiff = (int)$diff->format('%r%a');
                                         if ($daysDiff < 0) {
-                                            echo ' <span class="badge badge-danger ms-2">❌ Périmé</span>';
+                                            echo ' <span class="badge badge-danger ms-2"> ❌ Périmé </span>';
                                         } elseif ($daysDiff <= 15) {
-                                            echo ' <span class="badge badge-warning ms-2">⚠️ Proche péremption</span>';
+                                            echo ' <span class="badge badge-warning ms-2"> ⚠️ Proche péremption </span>';
                                         }
                                     }
                                     ?>
                                 </td>
                                 <td><?= htmlspecialchars($produit['fournisseur_nom'] ?? 'N/A') ?></td>
-                                <!-- <td>
-                                    <a href="index.php?page=produits/formulaire_produit&id=<?= $produit['id'] ?>" class="btn btn-sm btn-primary" title="Modifier">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
-                                    <a href="index.php?page=produits/supprimer&id=<?= $produit['id'] ?>" class="btn btn-sm btn-danger" title="Supprimer" onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td> -->
                                 <td>
                                     <a href="index.php?page=produits/modifier_produit&id=<?= $produit['id'] ?>"
                                        class="btn btn-sm btn-warning">

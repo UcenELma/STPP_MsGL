@@ -33,6 +33,7 @@ if (!isset($_SESSION['user_id'])) {
                         'produits/formulaire_produit',
                         'produits/supprimer_produit',
                         'produits/modifier_produit',
+                        'gestion_stock',
                     ];
 
                     if (in_array($page, $allowed_pages)) {

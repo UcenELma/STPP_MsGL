@@ -68,7 +68,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
             aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
@@ -86,7 +86,7 @@
                 <a class="collapse-item" href="blank.html">Blank Page</a>
             </div>
         </div>
-    </li>
+    </li> -->
     <!-- charts -->
     <li class="nav-item">
         <a class="nav-link" href="index.php?page=chart">
@@ -99,7 +99,7 @@
     <li class="nav-item">
         <a class="nav-link" href="index.php?page=produits/liste_produits">
             <i class="fas fa-fw fa-table"></i>
-            <span>Products</span>
+            <span>Produits</span>
         </a>
     </li>
 
@@ -113,11 +113,11 @@
 
     <!-- Transporteur -->
     <!-- <li class="nav-item">
-    <a class="nav-link" href="index.php?page=transporteur">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Transporteur</span>
-    </a>
-</li> -->
+        <a class="nav-link" href="index.php?page=transporteur">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Transporteur</span>
+        </a>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

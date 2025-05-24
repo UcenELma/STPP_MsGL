@@ -1,0 +1,10 @@
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+.table thead th {
+    vertical-align: middle;
+}
+.btn-sm {
+    margin-right: 5px;
+}
