@@ -56,3 +56,10 @@ CREATE TABLE stock_entrepot (
     FOREIGN KEY (produit_id) REFERENCES produits(id),
     FOREIGN KEY (entrepot_id) REFERENCES entrepots(id)
 );
+```
+## Licence
+Ce projet est proposé à des fins éducatives et peut être librement modifié et adapté.
+
+## Auteur
+Projet réalisé par Hocine Elma
+Dans le cadre du Master Génie Logistique – Faculté des Sciences Aïn-Chock – Université Hassan II de Casablanca.
