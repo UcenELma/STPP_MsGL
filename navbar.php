@@ -1,4 +1,7 @@
+<!-- navbar.php -->
+ 
 <?php
+
 require_once 'config.php';
 
 
@@ -70,7 +73,8 @@ $totalAlertsCount = count($lowStockAlerts) + count($nearExpiryAlerts);
 
                 <?php if (count($lowStockAlerts) > 0): ?>
                     <?php foreach ($lowStockAlerts as $alert): ?>
-                        <a class="dropdown-item d-flex align-items-center" href="index.php?page=produits/liste_produits&low_stock=1">
+                        <a class="dropdown-item d-flex align-items-center"
+                            href="index.php?page=produits/liste_produits&low_stock=1">
                             <div class="mr-3">
                                 <div class="icon-circle bg-warning">
                                     <i class="fas fa-exclamation-triangle text-white"></i>
@@ -79,7 +83,8 @@ $totalAlertsCount = count($lowStockAlerts) + count($nearExpiryAlerts);
                             <div>
                                 <div class="small text-gray-500"><?= date('j F Y') ?></div>
                                 <span class="font-weight-bold">
-                                    Produit "<strong><?= htmlspecialchars($alert['nom']) ?></strong>" en rupture de stock faible (<?= (int)$alert['qte'] ?> restant).
+                                    Produit "<strong><?= htmlspecialchars($alert['nom']) ?></strong>" en rupture de stock faible
+                                    (<?= (int) $alert['qte'] ?> restant).
                                 </span>
                             </div>
                         </a>
@@ -88,15 +93,18 @@ $totalAlertsCount = count($lowStockAlerts) + count($nearExpiryAlerts);
 
                 <?php if (count($nearExpiryAlerts) > 0): ?>
                     <?php foreach ($nearExpiryAlerts as $alert): ?>
-                        <a class="dropdown-item d-flex align-items-center" href="index.php?page=produits/liste_produits&near_expiry=1">
+                        <a class="dropdown-item d-flex align-items-center"
+                            href="index.php?page=produits/liste_produits&near_expiry=1">
                             <div class="mr-3">
                                 <div class="icon-circle bg-danger">
                                     <i class="fas fa-exclamation-circle text-white"></i>
                                 </div>
                             </div>
                             <div>
-                                <div class="small text-gray-500"><?= date('j F Y', strtotime($alert['date_peremption'])) ?></div>
-                                Produit "<strong><?= htmlspecialchars($alert['nom']) ?></strong>" proche de la date de péremption !
+                                <div class="small text-gray-500"><?= date('j F Y', strtotime($alert['date_peremption'])) ?>
+                                </div>
+                                Produit "<strong><?= htmlspecialchars($alert['nom']) ?></strong>" proche de la date de
+                                péremption !
                             </div>
                         </a>
                     <?php endforeach; ?>
@@ -106,7 +114,8 @@ $totalAlertsCount = count($lowStockAlerts) + count($nearExpiryAlerts);
                     <div class="dropdown-item text-center small text-gray-500">Aucune nouvelle alerte</div>
                 <?php endif; ?>
 
-                <a class="dropdown-item text-center small text-gray-500" href="index.php?page=produits/liste_produits">Voir toutes les alertes</a>
+                <a class="dropdown-item text-center small text-gray-500"
+                    href="index.php?page=produits/liste_produits">Voir toutes les alertes</a>
             </div>
         </li>
 
@@ -140,11 +149,15 @@ $totalAlertsCount = count($lowStockAlerts) + count($nearExpiryAlerts);
 
         <!-- Utilisateur -->
         <li class="nav-item dropdown no-arrow">
+
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hocine ELMA</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    <?= isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Utilisateur' ?>
+                </span>
                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
             </a>
+
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -172,21 +185,21 @@ $totalAlertsCount = count($lowStockAlerts) + count($nearExpiryAlerts);
 <!-- Modal de déconnexion -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
     aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="logoutModalLabel">Prêt à partir ?</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Fermer">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Sélectionnez « Déconnexion » ci-dessous si vous êtes prêt à mettre fin à votre session actuelle.
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-        <a class="btn btn-danger" href="logout.php">Déconnexion</a>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Prêt à partir ?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Fermer">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Sélectionnez « Déconnexion » ci-dessous si vous êtes prêt à mettre fin à votre session actuelle.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" href="logout.php">Déconnexion</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

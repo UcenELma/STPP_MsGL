@@ -1,9 +1,21 @@
-<!-- liste_produits.php -->
+<!-- fournisseur.php -->
+<?php include 'navbar_for.php'; ?>
 <meta charset="utf-8" />
-<!-- <style>
+<style>
+    .form-container {
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.05);
+}
     /* Styles personnalisés */
     .badge-warning {
         background-color: #ffc107;
+        color: #212529;
+    }
+    .badge-danger {
+        background-color:rgb(255, 0, 0);
         color: #212529;
     }
     .table thead th {
@@ -13,7 +25,8 @@
     .btn-sm {
         margin-right: 5px;
     }
-</style> -->
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 <?php
 require_once 'config.php';
@@ -110,13 +123,6 @@ $count_near_expiry = $alertStmtNearExpiry->fetchColumn();
 
 ?>
 
-<!-- En-tête et bouton ajouter -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Produits</h1>
-    <a href="index.php?page=produits/formulaire_produit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fa-solid fa-plus fas fa-sm text-white-50"></i> Ajouter un produit
-    </a>
-</div>
 
 <!-- Alertes globales -->
 <?php if ($count_low_qte > 0): ?>
@@ -132,7 +138,7 @@ $count_near_expiry = $alertStmtNearExpiry->fetchColumn();
 <?php endif; ?>
 
 <!-- Formulaire recherche + filtres + tri -->
-<form method="get" class="mb-4">
+<form method="get" class="form-container mb-4">
     <input type="hidden" name="page" value="produits/liste_produits" />
     <div class="row g-2 d-sm-flex align-items-center justify-content-between mb-4">
         <div class="col-sm-5">
@@ -157,7 +163,7 @@ $count_near_expiry = $alertStmtNearExpiry->fetchColumn();
 </form>
 
 <!-- Tableau produits -->
-<div class="card shadow mb-4">
+<div class="card shadow mb-4 form-container">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Liste des produits</h6>
     </div>
@@ -173,7 +179,7 @@ $count_near_expiry = $alertStmtNearExpiry->fetchColumn();
                         <th>Date production</th>
                         <th>Date péremption</th>
                         <th>Fournisseur</th>
-                        <th>Actions</th>
+                        <!-- <th>Actions</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -210,15 +216,15 @@ $count_near_expiry = $alertStmtNearExpiry->fetchColumn();
                                 </td>
                                 <td><?= htmlspecialchars($produit['fournisseur_nom'] ?? 'N/A') ?></td>
                                 <td>
-                                    <a href="index.php?page=produits/modifier_produit&id=<?= $produit['id'] ?>"
+                                    <!-- <a href="index.php?page=produits/modifier_produit&id=<?= $produit['id'] ?>"
                                        class="btn btn-sm btn-warning">
                                         <i class="fa fa-edit"></i> Modifier
-                                    </a>
-                                    <a href="index.php?page=produits/supprimer_produit&id=<?= $produit['id'] ?>"
+                                    </a> -->
+                                    <!-- <a href="index.php?page=produits/supprimer_produit&id=<?= $produit['id'] ?>"
                                        class="btn btn-sm btn-danger"
                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
                                         <i class="fa fa-trash"></i> Supprimer
-                                    </a>
+                                    </a> -->
                                 </td>
                             </tr>
                         <?php endforeach; ?>

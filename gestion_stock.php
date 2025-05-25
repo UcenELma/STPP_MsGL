@@ -1,3 +1,12 @@
+<style>
+        .form-container {
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.05);
+}
+</style>
 <?php
 require 'config.php';
 
@@ -68,16 +77,16 @@ $entrepots = $pdo->query("SELECT id, nom FROM entrepots")->fetchAll();
     <title>Gestion de Stock</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body">
+<body>
 
-    <h1 class="mb-4">Gestion de Stock</h1>
+<h1 class="h3 mb-0 text-gray-800 mb-3">Gestion de Stock</h1>
 
     <?php if ($message): ?>
         <div class="alert alert-info"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
 
     <!-- Formulaire ajout entrepôt -->
-    <div class="card shadow mb-4">
+    <div class="form-container card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Ajouter un entrepôt</h6>
         </div>
@@ -94,7 +103,7 @@ $entrepots = $pdo->query("SELECT id, nom FROM entrepots")->fetchAll();
     </div>
 
     <!-- Formulaire stocker produit -->
-    <div class="card shadow mb-4">
+    <div class="form-container card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Stocker un produit</h6>
         </div>
@@ -127,7 +136,7 @@ $entrepots = $pdo->query("SELECT id, nom FROM entrepots")->fetchAll();
     </div>
 
     <!-- Liste des stocks -->
-    <div class="card shadow mb-4">
+    <div class="form-container card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Liste des stocks</h6>
         </div>

@@ -3,6 +3,7 @@
 session_start();
 require 'config.php'; // Pour accéder à $db
 
+
 $error = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -30,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: index.php");
                     break;
                 case 'fournisseur':
-                    header("Location: forniseur.php");
+                    header("Location: fournisseur.php");
                     break;
                 case 'transporteur':
                     header("Location: transporteur.php");
@@ -150,20 +151,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </form>
 
                                 <hr>
-                                <a href="#" class="btn btn-google btn-user btn-block">
+                                <!-- <a href="#" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Login with Google
                                 </a>
                                 <a href="#" class="btn btn-facebook btn-user btn-block">
                                     <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                </a>
+                                </a> -->
 
                                 <hr>
                                 <div class="text-center">
                                     <a class="small" href="#">Forgot Password?</a>
                                 </div>
-                                <div class="text-center">
+                                <!-- <div class="text-center">
                                     <a class="small" href="#">Create an Account!</a>
-                                </div>
+                                </div> -->
 
                             </div>
                         </div>
