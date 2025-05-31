@@ -1,6 +1,6 @@
 <?php
 // modifier_produit.php
-require_once __DIR__ . '/../config.php';
+require_once (__DIR__ . './../../STPP_Database/config.php');
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die('ID produit invalide.');

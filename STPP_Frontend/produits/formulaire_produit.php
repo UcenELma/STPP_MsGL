@@ -28,7 +28,7 @@
                 <select name="fournisseur_id" class="form-select" required>
                     <option value="">-- Choisir un fournisseur --</option>
                     <?php
-                    require_once __DIR__ . '/../config.php';
+                    require_once (__DIR__ . './../../STPP_Database/config.php');
 
                     // Récupérer les fournisseurs
                     $stmt = $db->query("SELECT id, nom FROM utilisateurs WHERE role = 'fournisseur' ORDER BY nom");

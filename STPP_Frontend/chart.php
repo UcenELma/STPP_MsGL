@@ -1,5 +1,6 @@
 <?php
-include 'statistiques.php';
+// include 'statistiques.php';
+require_once __DIR__ . '/../STPP_Backend/statistiques.php';
 
 // Récupérer quantité par produit pour le Bar Chart
 $stmt = $db->query("SELECT nom, qte FROM produits");
@@ -10,7 +11,7 @@ $quantite_par_produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
     <a href="generate_report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+        <i class="fas fa-download fa-sm text-white-50"></i> Générer un rapport
     </a>
 </div>
 
@@ -125,10 +126,11 @@ $quantite_par_produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                         aria-labelledby="dropdownMenuLink">
                         <div class="dropdown-header">Options :</div>
-                        <a class="dropdown-item" href="#">Actualiser</a>
-                        <a class="dropdown-item" href="#">Télécharger</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Paramètres</a>
+                        <a href="index.php?page=produits/formulaire_produit" class="dropdown-item" href="#">Ajouter un
+                            produit</a>
+                        <!-- <div class="dropdown-divider"></div> -->
+                        <a href="index.php?page=stock" class="dropdown-item" href="#">Stocker un produit</a>
+                        <a href="index.php?page=chart" class="dropdown-item" href="#">Actualiser</a>
                     </div>
                 </div>
             </div>
@@ -152,7 +154,7 @@ $quantite_par_produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                         aria-labelledby="dropdownMenuLink">
-                        <a href="index.php?page=gestion_stock" class="dropdown-item">Gérer le stock</a>
+                        <a href="index.php?page=stock" class="dropdown-item">Gérer le stock</a>
                     </div>
                 </div>
             </div>

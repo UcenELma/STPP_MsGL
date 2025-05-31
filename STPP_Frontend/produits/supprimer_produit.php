@@ -1,7 +1,7 @@
 <?php
 ob_start();
 
-require_once __DIR__ . '/../config.php';
+require_once (__DIR__ . './../../STPP_Database/config.php');
 
 if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];

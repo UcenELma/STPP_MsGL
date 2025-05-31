@@ -1,7 +1,8 @@
 <!-- ajouter_utilisateur.php -->
 <meta charset="utf-8"/>
 <?php
-require_once './../config.php';
+// require_once './../config.php';
+require_once (__DIR__ . './../../STPP_Database/config.php');
 
 // Vérification basique des champs (à améliorer côté front et back)
 if (!isset($_POST['nom'], $_POST['email'], $_POST['mot_de_passe'], $_POST['role'])) {

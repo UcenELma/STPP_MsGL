@@ -1,6 +1,6 @@
 <?php
 // ajouter_produit.php
-require_once __DIR__ . '/../config.php';
+require_once (__DIR__ . './../../STPP_Database/config.php');
 
 if (!isset($_POST['nom'], $_POST['type'], $_POST['qte'], $_POST['date_production'], $_POST['date_peremption'], $_POST['fournisseur_id'])) {
     die('Données manquantes.');

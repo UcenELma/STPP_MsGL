@@ -1,7 +1,8 @@
 <meta charset="utf-8" />
 <?php
 // require_once './../config.php';
-require_once __DIR__ . '/../config.php';
+// require_once __DIR__ . '/../config.php';
+require_once (__DIR__ . './../../STPP_Database/config.php');
 
 // Vérifier si on a un ID en GET (affichage formulaire) ou POST (traitement formulaire)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

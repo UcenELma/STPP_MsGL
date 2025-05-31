@@ -2,7 +2,7 @@
 <meta charset="utf-8" />
 
 <?php
-require_once 'config.php';
+require_once (__DIR__ . './../../STPP_Database/config.php');
 
 
 // Pagination

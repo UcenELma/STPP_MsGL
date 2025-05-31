@@ -1,0 +1,38 @@
+tracabilite-projet /
+├── STPP_Backend/
+│   ├── fpdf/                      # Librairie PDF
+│   ├── generate_report.php       # Génère un rapport PDF
+│   ├── gestion_stock.php         # Gestion des stocks est mouvment de produits (backend)
+│   ├── login_process.php         # Traitement de l'authentification
+│   ├── logout.php                # Déconnexion
+│   ├── navbar_backend.php        # Barre de navigation backend
+│   └── statistiques.php          # Statistiques sur les données
+│
+├── STPP_Database/
+│   ├── config.php                # Paramètres de configuration
+│   └── db.php                    # creation de à la base de données
+│
+├── STPP_Frontend/
+│   ├── chart.php                 # Graphiques/statistiques frontend
+│   ├── composer.json / lock      # Gestionnaire de dépendances PHP
+│   ├── css/                      # Feuilles de style
+│   ├── footer.php / head.php     # Footer / Head HTML
+│   ├── img/                      # Images du projet
+│   ├── index.php                 # Page d’accueil
+│   ├── js/                       # Scripts JavaScript
+│   ├── login.php                 # Page de login
+│   ├── navbar.php / sidebar.php  # Navigation UI
+│   ├── stock.php                 # Vue du stock (frontend)
+│   ├── vendor/                   # Dépendances installées via Composer
+│   ├── produits/                 # Dossiers pour la gestion des produits
+│   │   ├── ajouter_produit.php
+│   │   ├── formulaire_produit.php
+│   │   ├── liste_produits.php
+│   │   ├── modifier_produit.php
+│   │   └── supprimer_produit.php
+│   └── utilisateurs/             # Dossiers pour la gestion des utilisateurs
+│       ├── ajouter_utilisateur.php
+│       ├── formulaire_utilisateur.php
+│       ├── liste_utilisateurs.php
+│       ├── modifier_utilisateur.php
+│       └── supprimer_utilisateur.php
