@@ -1,19 +1,5 @@
 <!-- liste_produits.php -->
 <meta charset="utf-8" />
-<!-- <style>
-    /* Styles personnalisés */
-    .badge-warning {
-        background-color: #ffc107;
-        color: #212529;
-    }
-    .table thead th {
-        vertical-align: middle;
-    }
-    /* Boutons d'action */
-    .btn-sm {
-        margin-right: 5px;
-    }
-</style> -->
 
 <?php
 require_once 'config.php';

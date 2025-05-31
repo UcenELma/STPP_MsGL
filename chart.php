@@ -116,7 +116,7 @@ $quantite_par_produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="col-xl-8 col-lg-7">
         <div class="card shadow mb-4" style="height: 400px;">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Quantité de produits non conservés</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Quantité de produits dans la zone de preparation</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -144,7 +144,7 @@ $quantite_par_produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="col-xl-4 col-lg-5">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Stock des produits conservés par entrepôt</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Stock par Zone</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -186,7 +186,7 @@ $quantite_par_produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
     const pieData = <?= json_encode($quantities) ?>;
 </script>
 
-<!-- Bar Chart -->
+<!-- JS for Bar Chart -->
 <script>
     const ctxBar = document.getElementById('qteBarChart').getContext('2d');
     const qteBarChart = new Chart(ctxBar, {
@@ -196,7 +196,7 @@ $quantite_par_produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
             datasets: [{
                 label: 'Quantité',
                 data: productQuantities,
-                backgroundColor: 'rgba(237, 11, 199, 0.59)',
+                backgroundColor: 'rgba(19, 195, 244, 0.9)',
                 borderColor: 'rgb(255, 255, 255)',
                 borderWidth: 1,
                 borderRadius: 4,
@@ -242,7 +242,7 @@ $quantite_par_produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
     });
 </script>
 
-<!-- Pie Chart -->
+<!-- JS for Pie Chart -->
 <script>
     const ctxPie = document.getElementById('myPieChart').getContext('2d');
     const myPieChart = new Chart(ctxPie, {

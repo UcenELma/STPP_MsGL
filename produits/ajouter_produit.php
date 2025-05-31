@@ -1,6 +1,3 @@
-
-
-
 <?php
 // ajouter_produit.php
 require_once __DIR__ . '/../config.php';

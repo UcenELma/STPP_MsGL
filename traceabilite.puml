@@ -1,0 +1,44 @@
+@startuml
+
+' Configuration générale
+skinparam classAttributeIconSize 0
+
+' Définition de la classe Utilisateur
+class Utilisateur {
+    +id : int
+    +nom : string
+    +email : string
+    +mot_de_passe_hash : string
+    +role : enum {admin, fournisseur, transporteur}
+}
+
+' Définition de la classe Produit
+class Produit {
+    +id : int
+    +nom : string
+    +type : string
+    +date_production : Date
+    +date_peremption : Date
+    +fournisseur_id : int
+}
+
+' Définition de la classe Entrepot
+class Entrepot {
+    +id : int
+    +nom : string
+}
+
+' Définition de la classe StockEntrepot
+class StockEntrepot {
+    +id : int
+    +produit_id : int
+    +entrepot_id : int
+    +qte : int
+}
+
+' Relations
+Utilisateur "1" <-- "0..*" Produit : fournit
+Produit "1" <-- "0..*" StockEntrepot : stocké dans
+Entrepot "1" <-- "0..*" StockEntrepot : contient
+
+@enduml
