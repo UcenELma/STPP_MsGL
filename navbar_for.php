@@ -1,4 +1,4 @@
-<!-- navbar_for.php -->
+<!-- navbar_forniseur.php -->
  
 <?php
 session_start(); // Pour accéder à $_SESSION['username']

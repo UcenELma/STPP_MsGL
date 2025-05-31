@@ -38,3 +38,14 @@ CREATE TABLE stock_entrepot (
     FOREIGN KEY (entrepot_id) REFERENCES entrepots(id)
 );
 
+CREATE TABLE mouvements_produits (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    produit_id INT NOT NULL,
+    source_entrepot_id INT,
+    destination_entrepot_id INT NOT NULL,
+    qte INT NOT NULL,
+    date_mouvement DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (produit_id) REFERENCES produits(id),
+    FOREIGN KEY (source_entrepot_id) REFERENCES entrepots(id),
+    FOREIGN KEY (destination_entrepot_id) REFERENCES entrepots(id)
+);

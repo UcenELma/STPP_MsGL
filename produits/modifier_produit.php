@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date_production = $_POST['date_production'] ?? '';
     $date_peremption = $_POST['date_peremption'] ?? '';
     $fournisseur_id = isset($_POST['fournisseur_id']) ? (int) $_POST['fournisseur_id'] : null;
-    $qte = isset($_POST['qte']) ? (int) $_POST['qte'] : null;  // <-- Récupération de la quantité
+    $qte = isset($_POST['qte']) ? (int) $_POST['qte'] : null;  
 
     // Validation simple
     if ($nom === '') $errors[] = "Le nom est requis.";
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date_production = $produit['date_production'];
     $date_peremption = $produit['date_peremption'];
     $fournisseur_id = $produit['fournisseur_id'];
-    $qte = $produit['qte'];  // <-- Préremplissage de la quantité
+    $qte = $produit['qte']; 
 }
 ?>
 

@@ -182,7 +182,7 @@ $totalAlertsCount = count($lowStockAlerts) + count($nearExpiryAlerts);
     </ul>
 </nav>
 
-<!-- Modal de déconnexion -->
+<!-- déconnexion -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">

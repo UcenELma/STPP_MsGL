@@ -55,4 +55,76 @@ foreach ($stocks as $stock) {
     $labels[] = $stock['entrepot'];
     $quantities[] = (int)$stock['total_qte'];
 }
+
+/* --- Récupération des filtres pour mouvements --- */
+$filtreProduit = $_GET['produit'] ?? '';
+$filtreEntrepot = $_GET['entrepot'] ?? '';
+
+$sql = "SELECT 
+            p.nom AS produit,
+            e1.nom AS source,
+            e2.nom AS destination,
+            m.qte,
+            m.date_mouvement
+        FROM mouvements_produits m
+        JOIN produits p ON m.produit_id = p.id
+        LEFT JOIN entrepots e1 ON m.source_entrepot_id = e1.id
+        JOIN entrepots e2 ON m.destination_entrepot_id = e2.id
+        WHERE 1=1 ";
+
+$params = [];
+
+if ($filtreProduit !== '') {
+    $sql .= " AND p.id = :produit ";
+    $params[':produit'] = $filtreProduit;
+}
+
+if ($filtreEntrepot !== '') {
+    $sql .= " AND (m.source_entrepot_id = :entrepot OR m.destination_entrepot_id = :entrepot) ";
+    $params[':entrepot'] = $filtreEntrepot;
+}
+
+$sql .= " ORDER BY m.date_mouvement DESC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+$mouvements = $stmt->fetchAll();
+
 ?>
+
+<?php
+
+// Total de produits
+$stmt = $db->query("SELECT COUNT(*) FROM produits");
+$total_produits = $stmt->fetchColumn();
+
+// Produits faibles (ex: quantité <= seuil_min)
+$stmt = $db->query("SELECT COUNT(*) FROM produits WHERE qte < 10");
+$produits_faibles = $stmt->fetchColumn();
+
+// Produits périmés (ex: date_expiration < aujourd'hui)
+$stmt = $db->prepare("SELECT COUNT(*) FROM produits WHERE date_peremption < CURDATE()");
+$stmt->execute();
+$produits_perimes = $stmt->fetchColumn();
+
+// Produits proches de péremption (ex: dans les 7 prochains jours)
+
+$stmt = $db->prepare("SELECT COUNT(*) FROM produits WHERE date_peremption BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)");
+$stmt->execute();
+$produits_proches_peremption = $stmt->fetchColumn();
+
+// (Optionnel) Quantité totale
+$sql = "
+    SELECT e.nom AS entrepot, SUM(se.qte) AS total_qte
+    FROM stock_entrepot se
+    JOIN entrepots e ON se.entrepot_id = e.id
+    GROUP BY e.nom
+";
+
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$stocks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$labels = array_column($stocks, 'entrepot');
+$quantities = array_map('intval', array_column($stocks, 'total_qte'));
+
